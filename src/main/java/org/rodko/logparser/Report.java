@@ -1,15 +1,30 @@
 package org.rodko.logparser;
 
-import java.util.Iterator;
-import java.util.Map;
+import javax.swing.*;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Report {
-    public String createReport(Map<String, Integer[]> report){
+    public ArrayList createReport(Map<String, Integer[]> report) {
 
-        for (String s: report.keySet()) {
-            report.get(s);
+        ArrayList result = new ArrayList();
+
+        String heading = "             Latency Table\n " +
+                "name | minLatency | maxLatency | avgLatency\n " +
+                "-------------------------------------------\n";
+        result.add(heading);
+
+
+        for (String s : report.keySet()) {
+            String intArrayString = Arrays.toString(report.get(s));
+            StringTokenizer tokenizer = new StringTokenizer(intArrayString, " [,]");
+            String token1 = tokenizer.nextToken(); //min
+            String token2 = tokenizer.nextToken(); //max
+            String token3 = tokenizer.nextToken(); //avg
+            String resultTable = s + "\t  |     " + token1 + "\t   |     " + token2 + "\t|    " + token3 + "\n";
+            result.add(resultTable);
         }
 
-        return null;
+        return result;
     }
 }

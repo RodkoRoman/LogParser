@@ -8,6 +8,7 @@ public class Statistics {
         ArrayList<String> name = new ArrayList<>();
         ArrayList<Integer> latency = new ArrayList<>();
         HashMap<String, Integer> nameAndLatency = new HashMap<>();
+
         for (int i = 0; i < statistics.size(); i++) {
             String string = statistics.get(i);
 //            System.out.println(string);
@@ -22,7 +23,7 @@ public class Statistics {
 //            System.out.println("Latensy: " + token3);
             nameAndLatency.put(token2, Integer.valueOf(token3));
         }
-        Map<String, Integer[]> resultStatistics =searchesForOriginalNames(name, latency, nameAndLatency);
+        Map<String, Integer[]> resultStatistics = searchesForOriginalNames(name, latency, nameAndLatency);
 //        System.out.println(resultStatistics);
         return resultStatistics;
     }
@@ -35,27 +36,31 @@ public class Statistics {
 //        System.out.println(originalName);
         ArrayList<Integer> maxMinAvg = new ArrayList<>();
         Map<String, Integer[]> namesAndValuesLatency = new HashMap<>();
-        Integer[] arrayLatency = new Integer[3];
+
 
         for (int i = 0; i < originalName.size(); i++) {
             for (int j = 0; j < name.size(); j++) {
+                int min = 0;
+                int max = 0;
+                int avg = 0;
                 if (originalName.get(i).equals(name.get(j))) {
 //                    System.out.println(i + " " + originalName.get(i) + " = " + j + name.get(j));
                     maxMinAvg.add(latency.get(j));
 //                    System.out.println(maxMinAvg);
 //                    System.out.println(maxMinAvg.size());
-                    Integer min = minValueSearch(maxMinAvg);
-                    Integer max = maxValueSearch(maxMinAvg);
-                    Integer avg = avgValueSearch(maxMinAvg);
+                    min = minValueSearch(maxMinAvg);
+                    max = maxValueSearch(maxMinAvg);
+                    avg = avgValueSearch(maxMinAvg);
 //                    System.out.println("min " + min);
 //                    System.out.println("max " + max);
 //                    System.out.println("avg " + avg);
+                    Integer[] arrayLatency = new Integer[3];
                     arrayLatency[0] = min;
                     arrayLatency[1] = max;
                     arrayLatency[2] = avg;
+                    namesAndValuesLatency.put(originalName.get(i), arrayLatency);
                 }
             }
-            namesAndValuesLatency.put(originalName.get(i), arrayLatency);
 //            System.out.println(namesAndValuesLatency);
             maxMinAvg.clear();
         }
