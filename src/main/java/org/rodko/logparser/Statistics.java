@@ -10,26 +10,29 @@ public class Statistics {
         HashMap<String, Integer> nameAndLatency = new HashMap<>();
         for (int i = 0; i < statistics.size(); i++) {
             String string = statistics.get(i);
-            //System.out.println(string);
+//            System.out.println(string);
 
             StringTokenizer tokenizer = new StringTokenizer(string, " ");
             String token1 = tokenizer.nextToken(); //время
             String token2 = tokenizer.nextToken(); //имя
             String token3 = tokenizer.nextToken(); //задержка
             name.add(token2);                      //добавляем в список имён
-            //System.out.println("Name: " + token2);
+//            System.out.println("Name: " + token2);
             latency.add(Integer.valueOf(token3));  //добавляем в список задержек
-            //System.out.println("Latensy: " + token3);
+//            System.out.println("Latensy: " + token3);
             nameAndLatency.put(token2, Integer.valueOf(token3));
         }
-        searchesForOriginalNames(name, latency, nameAndLatency);
-        return null;
+        Map<String, Integer[]> resultStatistics =searchesForOriginalNames(name, latency, nameAndLatency);
+//        System.out.println(resultStatistics);
+        return resultStatistics;
     }
 
-    private Map<String, Integer[]> searchesForOriginalNames(ArrayList<String> name, ArrayList<Integer> latency, HashMap<String, Integer> nameAndLatency) {
+    private Map<String, Integer[]> searchesForOriginalNames(ArrayList<String> name,
+                                                            ArrayList<Integer> latency,
+                                                            HashMap<String, Integer> nameAndLatency) {
 
         ArrayList<String> originalName = new ArrayList<>(nameAndLatency.keySet());
-        System.out.println(originalName);
+//        System.out.println(originalName);
         ArrayList<Integer> maxMinAvg = new ArrayList<>();
         Map<String, Integer[]> namesAndValuesLatency = new HashMap<>();
         Integer[] arrayLatency = new Integer[3];

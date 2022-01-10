@@ -12,7 +12,7 @@ public class Main {
         Report report = new Report();
 
         List<String> file = txtReader.readTxt(new File("C:\\Users\\Admin\\Desktop\\тест"));
-        System.out.println(file);
+//        System.out.println(file);
         Map<String, Integer[]> map = statistics.collectStatistics(file);
         String report1 = report.createReport(map);
 
